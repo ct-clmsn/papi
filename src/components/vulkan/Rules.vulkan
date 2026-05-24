@@ -1,0 +1,9 @@
+include components/vulkan/Makefile.vulkan
+
+COMPSRCS += components/vulkan/linux-vulkan.c
+COMPOBJS += linux-vulkan.o
+CFLAGS += -I$(VULKAN_DIR)/include
+LDFLAGS += $(LDL)
+
+linux-vulkan.o: components/vulkan/linux-vulkan.c components/vulkan/linux-vulkan.h $(HEADERS)
+	$(CC) $(LIBCFLAGS) $(OPTFLAGS) -c components/vulkan/linux-vulkan.c -o linux-vulkan.o

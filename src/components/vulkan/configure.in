@@ -1,0 +1,13 @@
+AC_INIT
+AC_ARG_WITH(vulkan_dir,
+	[  --with-vulkan-dir=<path>  Specify path to Vulkan SDK root directory],
+	[VULKAN_DIR=$withval
+	CFLAGS="$CFLAGS -I$withval/include"
+	LDFLAGS="$LDFLAGS -L$withval/lib -Wl,-rpath-link -Wl,$withval/lib"
+	AC_CHECK_HEADER([vulkan/vulkan.h], [],
+		[AC_MSG_ERROR([vulkan/vulkan.h not found in Vulkan SDK])])],
+	[AC_MSG_ERROR([Component requires path to Vulkan SDK root directory])])
+
+AC_CONFIG_FILES([Makefile.vulkan])
+AC_SUBST(VULKAN_DIR)
+AC_OUTPUT
